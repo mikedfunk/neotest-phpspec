@@ -1,0 +1,6 @@
+suites:
+  main:
+    namespace: TestProject
+    psr4_prefix: TestProject
+    src_path: src
+    spec_prefix: spec

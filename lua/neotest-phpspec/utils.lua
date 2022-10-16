@@ -3,7 +3,7 @@ local logger = require("neotest.logging")
 local M = {}
 local separator = "::"
 
----Generate an id which we can use to match Treesitter queries and PHPUnit tests
+---Generate an id which we can use to match Treesitter queries and PHPSpec specs
 ---@param position neotest.Position The position to return an ID for
 ---@param namespace neotest.Position[] Any namespaces the position is within
 ---@return string
@@ -11,7 +11,7 @@ M.make_test_id = function(position)
   -- Treesitter starts line numbers from 0 so we add 1
   local id = position.path .. separator .. (tonumber(position.range[1]) + 1)
 
-  logger.info("Path to test file:", { position.path })
+  logger.info("Path to spec file:", { position.path })
   logger.info("Treesitter id:", { id })
 
   return id
@@ -58,7 +58,7 @@ local function make_outputs(test, output_file)
   local test_attr = test["_attr"] or test[1]["_attr"]
 
   local test_id = test_attr.file .. separator .. test_attr.line
-  logger.info("PHPUnit id:", { test_id })
+  logger.info("PHPSpec id:", { test_id })
 
   local test_output = {
     status = "passed",
